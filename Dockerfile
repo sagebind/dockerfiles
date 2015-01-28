@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y \
     re2c
 
 # get the latest PHP source from master branch
-RUN git clone https://github.com/php/php-src.git /usr/local/src/php
+RUN git clone --depth=1 https://github.com/php/php-src.git /usr/local/src/php
 
 # we're going to be working out of the PHP src directory for the compile steps
 WORKDIR /usr/local/src/php
