@@ -1,2 +1,2 @@
 all:
-	docker build -t="coderstephen/php7" .
+	docker build -t="coderstephen/php7-apache" .
