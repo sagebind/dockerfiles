@@ -6,7 +6,7 @@ Multiple image variants are available, with more to come in the future. The curr
 
 - `coderstephen/php7:apache` Ubuntu environment with Apache 2
 
-The `latest` variant is equivalent to the 1apache` image.
+The `latest` variant is equivalent to the `apache` image.
 
 ## Building
 To build all variants, run `make` as root:
