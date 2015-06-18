@@ -7,3 +7,12 @@ Currently this image comes with a pre-configured Apache install.
 
 ## Switching PHP versions
 Tweaked versions of Rasmus's original build scripts are available in this Docker image; see documentation [here](https://github.com/rlerdorf/php7dev/blob/master/README.md).
+
+## Getting the latest PHP7 version
+Images are rebuilt nightly at [Docker.com](https://registry.hub.docker.com/u/coderstephen/php7); pulling a new image will give you the latest version of PHP7. To update by hand in an existing container, you can run
+
+```sh
+$ makephp 70
+```
+
+which will automatically pull the latest version and compile it.
