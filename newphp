@@ -1,0 +1,81 @@
+#!/usr/local/php70/bin/php
+<?php
+$prefix = "/usr/local";
+
+$map = [
+ 'bin/phar'=>'bin/phar.phar',
+ 'bin/phar.phar'=>'bin/phar.phar',
+ 'bin/php'=>'bin/php',
+ 'bin/php-cgi'=>'bin/php-cgi',
+ 'bin/php-config'=>'bin/php-config',
+ 'bin/phpize'=>'bin/phpize',
+ 'include/php'=>'include/php',
+ 'lib/php/build'=>'lib/php/build',
+ 'php'=>'php',
+ 'sbin/php-fpm'=>'sbin/php-fpm',
+ 'bin/phpdbg'=>'bin/phpdbg'
+];
+
+if($argc<2) usage();
+
+$debug = $zts = false;
+if($argc>2) {
+    for ($i = 2; $i < $argc; $i++) {
+        if ($argv[$i] == 'debug') {
+            $debug = true;
+        } else if ($argv[$i] == 'zts') {
+            $zts = true;
+        } else if ($argv[$i] == 'debugzts') {
+            $debug = true;
+            $zts = true;
+        }
+    }
+}
+
+$version = preg_replace('/[\.\-]+/', '', $argv[1]);
+if($version=='7') switch_php('php70', $debug, $zts);
+else if($version=='5') switch_php('php56', $debug, $zts);
+else if(file_exists("$prefix/$version/bin/php")) switch_php($version, $debug, $zts);
+else switch_php('php'.$version, $debug, $zts);
+
+function usage() {
+    $cmd = basename(__FILE__);
+    echo "Usage: $cmd 70|56|55|54|53 [debug|zts|debugzts]\n";
+    echo "To switch to PHP 5.5-debug: $cmd 55 debug\n\n";
+    exit;
+}
+
+function switch_php($version, $debug=false, $zts = false) {
+    global $map, $prefix;
+
+    $path = "$prefix/$version";
+    if($debug) $path .= '-debug';
+    if($zts) $path .= '-zts';
+    if(!is_file("$path/bin/php")) {
+        echo "$path/bin/php doesn't exist\n\n";
+        usage();
+        return false;
+    }
+    $real_version = trim(shell_exec("$path/bin/php -v | head -1"))
+        . (($debug && $zts) ? ' (with debug and zts)' : ($debug ? ' (with debug)' : ($zts ? ' (with zts)' : '')));
+    echo "Activating $real_version and restarting php-fpm\n";
+
+    foreach($map as $link=>$target) {
+        // echo "Creating $prefix/$link => $path/$target\n";
+        symlink_it("$path/$target", "$prefix/$link");
+    }
+    if(substr($version,0,4)=='php7') {
+        shell_exec("sudo a2dismod php5");
+        shell_exec("sudo a2enmod php7");
+    } else {
+        shell_exec("sudo a2dismod php7");
+        shell_exec("sudo a2enmod php5");
+    }
+    shell_exec("sudo service php-fpm restart");
+}
+
+function symlink_it($target, $link) {
+    // Skip files that have been hard-linked in place
+    if(file_exists($link) && !is_link($link)) return false;
+    system("sudo ln -f -s $target $link");
+}
