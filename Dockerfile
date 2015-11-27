@@ -56,7 +56,8 @@ RUN cd /usr/local/src/php && ./buildconf && ./configure \
     --with-libdir=/lib/x86_64-linux-gnu \
     --enable-fpm \
     --without-pear \
-    --with-openssl && \
+    --with-openssl \
+    --with-curl && \
     make && make install
 
 # Set up Rasmus's handy PHP scripts
