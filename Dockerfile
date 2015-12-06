@@ -95,4 +95,7 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 # Set up global composer path
 RUN mkdir $COMPOSER_HOME && chmod a+rw $COMPOSER_HOME
 
+# start httpd
+RUN service apache2 start
+
 CMD /bin/bash
