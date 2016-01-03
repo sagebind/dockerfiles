@@ -56,7 +56,8 @@ RUN cd /usr/local/src/php && ./buildconf && ./configure \
     --with-libdir=/lib/x86_64-linux-gnu \
     --enable-fpm \
     --without-pear \
-    --with-openssl && \
+    --with-openssl \
+    --with-curl && \
     make && make install
 
 # Set up Rasmus's handy PHP scripts
@@ -93,5 +94,8 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 
 # Set up global composer path
 RUN mkdir $COMPOSER_HOME && chmod a+rw $COMPOSER_HOME
+
+# start httpd
+RUN service apache2 start
 
 CMD /bin/bash
