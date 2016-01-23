@@ -14,7 +14,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
     gcc-arm-linux-gnueabi \
     binutils-arm-linux-gnueabi \
     gcc-arm-linux-androideabi \
-    rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 # Set up the installer script.
 COPY rust-install-pkg.sh /usr/local/bin/rust-install-pkg
