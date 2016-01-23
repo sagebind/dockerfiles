@@ -1,5 +1,5 @@
-# rust-build
-Rust build environment and cross-compiler
+# rust
+Rust build environment and cross-compiler.
 
 A Docker image configured with a full Rust build environment. Includes `rustc` and `cargo`, and is set up with cross-compiling enabled for common targets. Included are also C/C++ compilers and linkers for compiling for GNU ABI targets, such as `mingw` for Windows.
 
