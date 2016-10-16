@@ -1,2 +1,2 @@
-#!/bin/execlineb -P
-true
+#!/bin/execlineb -S0
+test "$1" != halt

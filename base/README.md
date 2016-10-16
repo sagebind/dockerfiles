@@ -1,6 +1,12 @@
 # sagebind/base
 A tiny, lightweight image based on [Alpine Linux][alpine] that uses [s6] to run multiple services in one container.
 
+## Commands
+Some custom commands are included for controlling a container while running:
+
+- `shutdown`: Shuts down all services and then terminates the container.
+- `halt`: Like `shutdown`, but causes the container to return a failure exit code.
+
 ## Services
 This image runs services as background processes with automatic and proper process supervision with minimal overhead. You can even run a foreground service by giving Docker a CMD to run, and all services in the container will still run in the background without interrupting the foreground process.
 
@@ -11,11 +17,11 @@ By default the image is mostly empty and has no services. To add a service, just
 nginx -g 'daemon off;'
 ```
 
-By default services will be restarted if they exit or crash. For primary services this is not usually the desired behavior. To make sure the Docker container stops when a critial service dies, add a `finish` script for the service at `/service/{name}/finish` that calls `shutdown`:
+By default services will be restarted if they exit or crash. For primary services this is not usually the desired behavior. To make sure the Docker container stops when a critial service dies, add a `finish` script for the service at `/service/{name}/finish` that calls `halt`:
 
 ```sh
 #!/bin/sh
-shutdown
+halt
 ```
 
 
