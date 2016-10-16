@@ -11,6 +11,13 @@ By default the image is mostly empty and has no services. To add a service, just
 nginx -g 'daemon off;'
 ```
 
+By default services will be restarted if they exit or crash. For primary services this is not usually the desired behavior. To make sure the Docker container stops when a critial service dies, add a `finish` script for the service at `/service/{name}/finish` that calls `shutdown`:
+
+```sh
+#!/bin/sh
+shutdown
+```
+
 
 [alpine]: https://www.alpinelinux.org
 [s6]: http://skarnet.org/software/s6/
