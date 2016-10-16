@@ -1,0 +1,11 @@
+#!/bin/execlineb -S0
+foreground {
+    if { test $# -ne 0 }
+    background {
+        foreground {
+            /bin/s6-setsid -g -q $@
+        }
+        /bin/s6-svscanctl -t /service
+    }
+}
+/bin/s6-svscan -S -t0 /service
