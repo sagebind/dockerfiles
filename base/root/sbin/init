@@ -5,7 +5,10 @@ foreground {
         foreground {
             /bin/s6-setsid -g -q $@
         }
-        /bin/s6-svscanctl -t /service
+        /sbin/shutdown
     }
+}
+foreground {
+    find /init -type f -perm -300 -exec {} \;
 }
 /bin/s6-svscan -S -t0 /service
