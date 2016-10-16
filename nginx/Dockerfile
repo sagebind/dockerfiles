@@ -6,4 +6,6 @@ RUN apk --no-cache add nginx && \
 
 COPY root /
 
+WORKDIR /var/www
+
 EXPOSE 80 443
