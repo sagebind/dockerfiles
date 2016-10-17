@@ -1,2 +1,2 @@
 #!/bin/execlineb -P
-redirfd -w 2 /dev/null /bin/s6-svscanctl -s -t /service
+redirfd -w 2 /dev/null /bin/s6-svscanctl -s -t /etc/service

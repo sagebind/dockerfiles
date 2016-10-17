@@ -1,6 +1,14 @@
 #!/bin/execlineb -S0
 foreground {
-    if { test $# -ne 0 }
+    echo $PATH
+}
+foreground {
+    /usr/bin/find /etc/init -type f -perm -300 -exec {} \;
+}
+foreground {
+    if {
+        /usr/bin/test $# -ne 0
+    }
     background {
         foreground {
             /bin/s6-setsid -g -q $@
@@ -8,7 +16,4 @@ foreground {
         /sbin/shutdown
     }
 }
-foreground {
-    find /init -type f -perm -300 -exec {} \;
-}
-/bin/s6-svscan -S -t0 /service
+/bin/s6-svscan -S -t0 /etc/service

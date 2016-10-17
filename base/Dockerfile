@@ -3,7 +3,6 @@ MAINTAINER Stephen Coakley <me@stephencoakley.com>
 
 RUN apk --no-cache add s6
 
-COPY root /
+COPY root/ /
 
 ENTRYPOINT ["/sbin/init"]
-CMD []
