@@ -1,8 +1,5 @@
 #!/bin/execlineb -S0
 foreground {
-    echo $PATH
-}
-foreground {
     /usr/bin/find /etc/init -type f -perm -300 -exec {} \;
 }
 foreground {

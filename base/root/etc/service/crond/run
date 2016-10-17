@@ -1,2 +1,2 @@
 #!/bin/execlineb -P
-/usr/sbin/crond -f -d1
+/usr/sbin/crond -f -d6
