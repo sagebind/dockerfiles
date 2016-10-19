@@ -1,0 +1,2 @@
+#!/bin/sh
+exec dnsmasq --keep-in-foreground --user=root --no-negcache
