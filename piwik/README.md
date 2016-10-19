@@ -1,5 +1,5 @@
 # Piwik
-A lightweight image for [Piwik][piwik], a popular open-source analytics platform. Includes Nginx as a web server, PHP 7, and the latest Piwik version. Piwik jobs and tasks are automatically run in the container as a cron job, so no extra setup for archiving is needed.
+A lightweight image for [Piwik], a popular open-source analytics platform. Includes [NGINX] as a web server, PHP 7, and the latest Piwik version. Piwik jobs and tasks are automatically run in the container as a cron job, so no extra setup for archiving is needed.
 
 ## Usage
 To set up a working Piwik container, you will need to provide a MySQL database. The best way is to create a separate container for the database and then link it to the Piwik container, but you can also use a remote database.
@@ -14,4 +14,5 @@ The database can be configured using environment variables when the container is
 - `DB_PREFIX`: A string that the Piwik table names are prefixed with. Default is `piwik_`. Optional.
 
 
+[nginx]: http://nginx.org
 [piwik]: http://piwik.org
