@@ -1,2 +1,2 @@
 #!/bin/execlineb -P
-crond -f -d6
+syslogd -n -O -

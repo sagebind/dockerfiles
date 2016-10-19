@@ -1,16 +1,16 @@
 #!/bin/execlineb -S0
 foreground {
-    /usr/bin/find /etc/init -type f -perm -300 -exec {} \;
+    find /etc/init -type f -perm -300 -exec {} \;
 }
 foreground {
     if {
-        /usr/bin/test $# -ne 0
+        test $# -ne 0
     }
     background {
         foreground {
-            /bin/s6-setsid -g -q $@
+            s6-setsid -g -q $@
         }
-        /sbin/shutdown
+        shutdown
     }
 }
-/bin/s6-svscan -S -t0 /etc/service
+s6-svscan -S -t0 /etc/service
