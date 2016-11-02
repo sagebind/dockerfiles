@@ -1,10 +1,17 @@
 #!/usr/bin/awk -f
 # Simple environment expander utility, similar to Gettext's envsubst utility.
-#
-# Usage: envsubst < template > output
-#
-# Expands environment variables of the form ${NAME} to the variable value from
-# standard input to standard output.
+BEGIN {
+    for (i in ARGV) {
+        if (match(ARGV[i], "^--?h(elp)?$")) {
+            print "Usage: envsubst < template > output";
+            print;
+            print "Expands environment variables of the form ${NAME} to the variable value from";
+            print "standard input to standard output.";
+            exit;
+        }
+    }
+}
+
 {
     while (match($0, "[$]{[^}]*}")) {
         var = substr($0, RSTART + 2, RLENGTH - 3);

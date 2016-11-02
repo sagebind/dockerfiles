@@ -1,5 +1,5 @@
 #!/bin/sh
-CONFIG_FILE=/var/www/config/config.ini.php
+CONFIG_FILE=/srv/www/config/config.ini.php
 TEMPLATE=/etc/config.ini.php.template
 
 if [ -z "$DB_PORT" ]; then

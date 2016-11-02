@@ -15,4 +15,4 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
         php7-sockets \
         php7-zlib
 
-COPY root/ /
+COPY root /

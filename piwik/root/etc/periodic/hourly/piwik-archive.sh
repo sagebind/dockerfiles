@@ -1,2 +1,2 @@
 #!/bin/sh
-exec php7 /var/www/console core:archive
+exec php7 /srv/www/console core:archive

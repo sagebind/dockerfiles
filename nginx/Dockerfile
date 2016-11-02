@@ -2,10 +2,11 @@ FROM sagebind/base:latest
 MAINTAINER Stephen Coakley <me@stephencoakley.com>
 
 RUN apk --no-cache add nginx && \
-    mv /var/lib/nginx/html /var/www
+    addgroup nginx srv && \
+    mv /var/lib/nginx/html /srv/www
 
-COPY root/ /
+COPY root /
 
-WORKDIR /var/www
+WORKDIR /srv/www
 
 EXPOSE 80 443

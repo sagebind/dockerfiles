@@ -1,6 +1,12 @@
 # Dockerfiles
 This repository contains a collection of Dockerfiles, which are specifications of container images for Docker. Official builds of these images are available in [Docker Hub][docker-hub] under my user name.
 
+## Conventions
+While each image in this repository serves a different use-case, for simplicity they all share some common conventions:
+
+- When possible, services are run under a non-root user for enhanced security.
+- Binaries, sources, and configs for a container's primary apps are put in [`/srv`][srv] to keep paths short and sane and to ease managing permissions. This directory is accessible to all users in the `srv` group, and is always readable and writable to users in the `srv` group. These settings are set when the container boots up.
+
 ## Images
 Below is a list and brief summary of all the images contained in this repository. The image name is linked to an appropriate README with further details on the image.
 
@@ -30,3 +36,4 @@ Unless otherwise indicated, all files in this repository are licensed under the 
 [nginx]: http://nginx.org
 [piwik]: http://piwik.org
 [s6]: http://skarnet.org/software/s6/
+[srv]: http://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/srv.html

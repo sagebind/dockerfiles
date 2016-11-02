@@ -17,7 +17,6 @@ RUN apk --no-cache add \
     rm -r piwik && \
     wget -q http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz && \
     gunzip GeoLiteCity.dat.gz && \
-    mv GeoLiteCity.dat misc/GeoIPCity.dat && \
-    chown -R nginx:nginx .
+    mv GeoLiteCity.dat misc/GeoIPCity.dat
 
-COPY root/ /
+COPY root /
