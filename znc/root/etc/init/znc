@@ -1,0 +1,8 @@
+#!/bin/sh
+mkdir -p /etc/znc/configs
+
+if [ ! -f /etc/znc/configs/znc.conf ]; then
+    mv /etc/znc.conf /etc/znc/configs
+fi
+
+chown -R znc:znc /etc/znc
