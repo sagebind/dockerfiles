@@ -1,50 +1,64 @@
-USER = sagebind
-IMAGES = base nginx php php-nginx piwik reverse-proxy
-BUILD = docker build -t $(USER)/$(1) $(1)
+NS = sagebind
+IMAGES = base \
+		nginx \
+		php \
+		php-nginx \
+		piwik@latest \
+		piwik@3 \
+		piwik@3.0 \
+		piwik@3.0.1 \
+		piwik@2 \
+		piwik@2.17 \
+		piwik@2.17.1 \
+		reverse-proxy \
+		znc
+PUSHES = $(patsubst %,%/push,$(IMAGES))
 
 
-build: $(patsubst %,%.build,$(IMAGES))
+.PHONY: build
+build: $(IMAGES)
 
-push: $(patsubst %,%.push,$(IMAGES))
+.PHONY: push
+push: $(PUSHES)
 
-base.build:
-	$(call BUILD,base)
+.PHONY: .FORCE
+.FORCE:
+$(IMAGES) $(PUSHES): .FORCE
 
-base.push:
-	docker push $(USER)/base
+%/push:
+	docker push $(NS)/$(subst @,:,$*)
 
-nginx.build: base.build
-	$(call BUILD,nginx)
+base:
+	docker build -t $(NS)/base base
 
-nginx.push:
-	docker push $(USER)/nginx
+nginx: base
+	docker build -t $(NS)/nginx nginx
 
-php.build: base.build
-	$(call BUILD,php)
+php: base
+	docker build -t $(NS)/php php
 
-php.push:
-	docker push $(USER)/php
+php-nginx: nginx
+	docker build -t $(NS)/php-nginx php-nginx
 
-php-nginx.build: nginx.build
-	$(call BUILD,php-nginx)
+piwik: piwik@latest
 
-php-nginx.push:
-	docker push $(USER)/php-nginx
+piwik@3: piwik@3.0
+	docker tag $(NS)/piwik:3.0 $(NS)/piwik:3
 
-piwik.build: php-nginx.build
-	$(call BUILD,piwik)
+piwik@3.0: piwik@3.0.1
+	docker tag $(NS)/piwik:3.0.1 $(NS)/piwik:3.0
 
-piwik.push:
-	docker push $(USER)/piwik
+piwik@2: piwik@2.17
+	docker tag $(NS)/piwik:2.17 $(NS)/piwik:2
 
-reverse-proxy.build: nginx.build
-	$(call BUILD,reverse-proxy)
+piwik@2.17: piwik@2.17.1
+	docker tag $(NS)/piwik:2.17.1 $(NS)/piwik:2.17
 
-reverse-proxy.push:
-	docker push $(USER)/reverse-proxy
+piwik@%: php-nginx
+	docker build --build-arg PIWIK_VERSION=$* -t $(NS)/piwik:$* piwik
 
-znc.build: base.build
-	$(call BUILD,base)
+reverse-proxy: nginx
+	docker build -t $(NS)/reverse-proxy reverse-proxy
 
-znc.push:
-	docker push $(USER)/znc
+znc: base
+	docker build -t $(NS)/znc znc
