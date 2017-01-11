@@ -31,6 +31,7 @@ piwik.build: php-nginx.build
 	$(call BUILD,piwik)
 
 piwik.push:
+	docker push $(USER)/piwik
 
 reverse-proxy.build: nginx.build
 	$(call BUILD,reverse-proxy)
