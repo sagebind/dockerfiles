@@ -1,7 +1,7 @@
 FROM sagebind/php-nginx:latest
 MAINTAINER Stephen Coakley <me@stephencoakley.com>
 
-ARG PIWIK_VERSION=2.16.5
+ARG PIWIK_VERSION=latest
 
 RUN apk --no-cache add \
         php7-ctype \
