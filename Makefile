@@ -37,3 +37,9 @@ reverse-proxy.build: nginx.build
 
 reverse-build.push:
 	docker push $(USER)/reverse-build
+
+znc.build: base.build
+	$(call BUILD,base)
+
+znc.push:
+	docker push $(USER)/znc
