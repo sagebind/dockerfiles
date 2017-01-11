@@ -1,19 +1,39 @@
-all: sagebind/base sagebind/nginx sagebind/php sagebind/php-nginx sagebind/piwik
+USER = sagebind
+IMAGES = base nginx php php-nginx piwik reverse-proxy
+BUILD = docker build -t $(USER)/$(1) $(1)
 
-sagebind/base:
-	docker build -t $@ base
 
-sagebind/nginx: sagebind/base
-	docker build -t $@ nginx
+build: $(patsubst %,%.build,$(IMAGES))
 
-sagebind/php: sagebind/base
-	docker build -t $@ php
+push: $(patsubst %,%.push,$(IMAGES))
 
-sagebind/reverse-proxy: sagebind/nginx
-	docker build -t $@ reverse-proxy
+base.build:
+	$(call BUILD,base)
 
-sagebind/php-nginx: sagebind/nginx
-	docker build -t $@ php-nginx
+base.push:
 
-sagebind/piwik: sagebind/php-nginx
-	docker build -t $@ piwik
+nginx.build: base.build
+	$(call BUILD,nginx)
+
+nginx.push:
+
+php.build: base.build
+	$(call BUILD,php)
+
+php.push:
+
+php-nginx.build: nginx.build
+	$(call BUILD,php-nginx)
+
+php-nginx.push:
+
+piwik.build: php-nginx.build
+	$(call BUILD,piwik)
+
+piwik.push:
+
+reverse-proxy.build: nginx.build
+	$(call BUILD,reverse-proxy)
+
+reverse-build.push:
+	docker push $(USER)/reverse-build
