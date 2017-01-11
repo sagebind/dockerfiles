@@ -6,7 +6,7 @@ sagebind/base:
 sagebind/nginx: sagebind/base
 	docker build -t $@ nginx
 
-sagebind/php: sagebind/php
+sagebind/php: sagebind/base
 	docker build -t $@ php
 
 sagebind/reverse-proxy: sagebind/nginx
