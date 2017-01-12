@@ -60,5 +60,8 @@ piwik@%: php-nginx
 reverse-proxy: nginx
 	docker build -t $(NS)/reverse-proxy reverse-proxy
 
+rust-builder:
+	docker build -t $(NS)/rust-builder rust/builder
+
 znc: base
 	docker build -t $(NS)/znc znc
