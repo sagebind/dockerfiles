@@ -1,0 +1,4 @@
+#!/bin/sh
+mkdir -p /var/run/fcgiwrap
+chown nginx:daemon /var/run/fcgiwrap
+exec s6-setuidgid nginx fcgiwrap -s unix:/var/run/fcgiwrap/fcgiwrap.sock

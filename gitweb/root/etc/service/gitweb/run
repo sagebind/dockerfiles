@@ -1,0 +1,3 @@
+#!/bin/sh
+export FCGI_SOCKET_PATH=127.0.0.1:9002
+exec s6-setuidgid nginx /usr/share/gitweb/gitweb.cgi --fastcgi

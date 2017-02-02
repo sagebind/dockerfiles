@@ -1,5 +1,6 @@
 NS = sagebind
 IMAGES = base \
+		gitweb \
 		nginx \
 		php \
 		php-nginx \
@@ -30,6 +31,9 @@ $(IMAGES) $(PUSHES): .FORCE
 
 base:
 	docker build -t $(NS)/base base
+
+gitweb: nginx
+	docker build -t $(NS)/gitweb gitweb
 
 nginx: base
 	docker build -t $(NS)/nginx nginx
