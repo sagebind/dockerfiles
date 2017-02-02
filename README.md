@@ -1,7 +1,7 @@
 # Dockerfiles
 This repository contains a collection of Dockerfiles, which are specifications of container images for Docker. Official builds of these images are available in [Docker Hub][docker-hub] under my user name.
 
-[![CircleCI](https://img.shields.io/circleci/project/github/sagebind/dockerfiles.svg)]()
+[![CircleCI](https://img.shields.io/circleci/project/github/sagebind/dockerfiles.svg)](https://circleci.com/gh/sagebind/dockerfiles)
 
 ## Conventions
 While each image in this repository serves a different use-case, for simplicity they all share some common conventions:
