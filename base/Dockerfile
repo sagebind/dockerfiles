@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:latest
 MAINTAINER Stephen Coakley <me@stephencoakley.com>
 
 RUN apk --no-cache upgrade && \
