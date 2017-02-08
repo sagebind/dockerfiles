@@ -50,6 +50,7 @@ Docker encourages the use of stdout and stderr as the means of capturing logs fr
 Some custom commands are included for controlling services, the container state, or for just making working with common tasks easier:
 
 - `envsubst`: Piping command that replaces patterns of the form `${ENV_NAME}` with the value of the `ENV_NAME` environment variable. Useful for making templated config files.
+- `service`: Helper script for starting and stopping services.
 - `shutdown`: Shuts down all services and then terminates the container.
 - `halt`: Like `shutdown`, but causes the container to return a failure exit code.
 

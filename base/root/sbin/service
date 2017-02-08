@@ -1,0 +1,29 @@
+#!/bin/sh
+SERVICE_DIR=/etc/service/$1
+COMMAND=$2
+
+if test ! -d $SERVICE_DIR; then
+    echo "Service not found: $1" >&2
+    exit 1
+fi
+
+case $COMMAND in
+    restart)
+        s6-svc -d -wd $SERVICE_DIR
+        s6-svc -u $SERVICE_DIR
+        ;;
+    start)
+        s6-svc -u $SERVICE_DIR
+        ;;
+    status)
+        echo "Service: $SERVICE_DIR"
+        echo " Status: $(s6-svstat $SERVICE_DIR)"
+        ;;
+    stop)
+        s6-svc -d $SERVICE_DIR
+        ;;
+    *)
+        echo "Unknown command: $COMMAND" >&2
+        exit 1
+        ;;
+esac
