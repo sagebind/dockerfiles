@@ -7,7 +7,7 @@ IMAGES = base \
 		piwik@latest \
 		piwik@3 \
 		piwik@3.0 \
-		piwik@3.0.3 \
+		piwik@3.0.4 \
 		piwik@2 \
 		piwik@2.17 \
 		piwik@2.17.1 \
@@ -49,8 +49,8 @@ piwik: piwik@latest
 piwik@3: piwik@3.0
 	docker tag $(NS)/piwik:3.0 $(NS)/piwik:3
 
-piwik@3.0: piwik@3.0.3
-	docker tag $(NS)/piwik:3.0.3 $(NS)/piwik:3.0
+piwik@3.0: piwik@3.0.4
+	docker tag $(NS)/piwik:3.0.4 $(NS)/piwik:3.0
 
 piwik@2: piwik@2.17
 	docker tag $(NS)/piwik:2.17 $(NS)/piwik:2
