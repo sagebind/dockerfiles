@@ -1,5 +1,6 @@
 NS = sagebind
 IMAGES = base \
+		digitalocean-ddns \
 		gitweb \
 		nginx \
 		php \
@@ -31,6 +32,9 @@ $(IMAGES) $(PUSHES): .FORCE
 
 base:
 	docker build -t $(NS)/base base
+
+digitalocean-ddns: base
+	docker build -t $(NS)/digitalocean-ddns digitalocean-ddns
 
 gitweb: nginx
 	docker build -t $(NS)/gitweb gitweb
