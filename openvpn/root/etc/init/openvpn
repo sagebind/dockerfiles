@@ -1,0 +1,5 @@
+#!/bin/sh
+cd /usr/share/easy-rsa
+mkdir /etc/openvpn/keys
+cp ./vars.example ./vars    #easy-rsa v3
+cp ./vars /etc/openvpn/keys #easy-rsa v2

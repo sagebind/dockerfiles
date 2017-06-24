@@ -3,6 +3,7 @@ IMAGES = base \
 		digitalocean-ddns \
 		gitweb \
 		nginx \
+		openvpn \
 		php \
 		php-nginx \
 		piwik@latest \
@@ -41,6 +42,9 @@ gitweb: nginx
 
 nginx: base
 	docker build -t $(NS)/nginx nginx
+
+openvpn: nginx
+	docker build -t $(NS)/openvpn openvpn
 
 php: base
 	docker build -t $(NS)/php php
