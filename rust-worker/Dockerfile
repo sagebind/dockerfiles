@@ -6,7 +6,7 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 ENV RUST_BACKTRACE=1
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends ca-certificates git gzip ssh tar
+    apt-get install -y --no-install-recommends build-essential ca-certificates git gzip ssh tar
 COPY rustup-init /rustup-init
 RUN /rustup-init -y --default-toolchain $TOOLCHAIN && \
     rm /rustup-init && \
