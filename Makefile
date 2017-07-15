@@ -11,6 +11,8 @@ IMAGES = base \
 		piwik@2.17 \
 		piwik@2.17.1 \
 		reverse-proxy \
+		rust-worker@stable \
+		rust-worker@nightly \
 		znc
 PUSHES = $(patsubst %,%/push,$(IMAGES))
 
@@ -60,8 +62,8 @@ piwik@%: php-nginx
 reverse-proxy: nginx
 	docker build -t $(NS)/reverse-proxy reverse-proxy
 
-rust-builder:
-	docker build -t $(NS)/rust-builder rust/builder
+rust-worker@%:
+	docker build --build-arg TOOLCHAIN=$* -t $(NS)/rust-worker:$* rust-worker
 
 znc: base
 	docker build -t $(NS)/znc znc
