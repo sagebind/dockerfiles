@@ -1,0 +1,36 @@
+#!/bin/sh
+mkdir -p $SEAFILE_CENTRAL_CONF_DIR
+
+# Initialize ccnet config.
+ccnet-init -F $SEAFILE_CENTRAL_CONF_DIR -c $CCNET_CONF_DIR --name $SERVER_NAME --port $CCNET_PORT --host 0.0.0.0
+
+# Initialize Seafile server config.
+seaf-server-init -F $SEAFILE_CENTRAL_CONF_DIR --seafile-dir $SEAFILE_CONF_DIR --port $SEAFILE_PORT --fileserver-port $FILESERVER_PORT
+
+# Set Seafile data directory.
+if [ ! -f $CCNET_CONF_DIR/seafile.ini ]; then
+    printf $SEAFILE_CONF_DIR > $CCNET_CONF_DIR/seafile.ini
+fi
+
+# Provision a secret key for Seahub sessions.
+if [ ! -f $SEAFILE_CENTRAL_CONF_DIR/seahub_settings.py ]; then
+    echo "SECRET_KEY = '$(uuidgen -r)'" > $SEAFILE_CENTRAL_CONF_DIR/seahub_settings.py
+fi
+
+# Set up databases.
+if [ ! -f $SEAFILE_CONF_DIR/seahub.db ]; then
+    python /srv/seafile-server/seahub/manage.py syncdb
+
+    # Move the database into the persistent volume.
+    mv /srv/seahub.db $SEAFILE_CONF_DIR/seahub.db
+fi
+
+# We want to keep all persistent data in the persistent volume, so create
+# symbolic links to databases in the place Seahub expects.
+mkdir -p $SEAFILE_CONF_DIR/GroupMgr
+mkdir -p $SEAFILE_CONF_DIR/OrgMgr
+mkdir -p $SEAFILE_CONF_DIR/PeerMgr
+ln -s $SEAFILE_CONF_DIR/GroupMgr $CCNET_CONF_DIR/GroupMgr
+ln -s $SEAFILE_CONF_DIR/OrgMgr $CCNET_CONF_DIR/OrgMgr
+ln -s $SEAFILE_CONF_DIR/PeerMgr $CCNET_CONF_DIR/PeerMgr
+ln -s $SEAFILE_CONF_DIR/seahub.db /srv/seahub.db

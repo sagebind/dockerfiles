@@ -15,6 +15,7 @@ IMAGES = base \
 		reverse-proxy \
 		rust-worker@stable \
 		rust-worker@nightly \
+		seafile \
 		znc
 PUSHES = $(patsubst %,%/push,$(IMAGES))
 
@@ -72,6 +73,9 @@ reverse-proxy: nginx
 
 rust-worker@%:
 	docker build --build-arg TOOLCHAIN=$* -t $(NS)/rust-worker:$* rust-worker
+
+seafile: base
+	docker build -t $(NS)/seafile seafile
 
 znc: base
 	docker build -t $(NS)/znc znc
