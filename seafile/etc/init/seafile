@@ -30,7 +30,7 @@ fi
 mkdir -p $SEAFILE_CONF_DIR/GroupMgr
 mkdir -p $SEAFILE_CONF_DIR/OrgMgr
 mkdir -p $SEAFILE_CONF_DIR/PeerMgr
-ln -s $SEAFILE_CONF_DIR/GroupMgr $CCNET_CONF_DIR/GroupMgr
-ln -s $SEAFILE_CONF_DIR/OrgMgr $CCNET_CONF_DIR/OrgMgr
-ln -s $SEAFILE_CONF_DIR/PeerMgr $CCNET_CONF_DIR/PeerMgr
-ln -s $SEAFILE_CONF_DIR/seahub.db /srv/seahub.db
+ln -fs $SEAFILE_CONF_DIR/GroupMgr $CCNET_CONF_DIR/GroupMgr
+ln -fs $SEAFILE_CONF_DIR/OrgMgr $CCNET_CONF_DIR/OrgMgr
+ln -fs $SEAFILE_CONF_DIR/PeerMgr $CCNET_CONF_DIR/PeerMgr
+ln -fs $SEAFILE_CONF_DIR/seahub.db /srv/seahub.db
