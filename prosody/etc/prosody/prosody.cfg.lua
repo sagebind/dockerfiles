@@ -56,6 +56,10 @@ s2s_require_encryption = true
 s2s_secure_auth = false
 s2s_secure_domains = {"jabber.org"}
 https_certificate = "/etc/certs/"..os.getenv("HOST")..".crt"
+ssl = {
+    key = "/etc/certs/"..os.getenv("HOST")..".key";
+    certificate = "/etc/certs/"..os.getenv("HOST")..".crt";
+}
 
 -- Configure storage backend.
 default_storage = "sql"
@@ -72,12 +76,11 @@ archive_expires_after = "never"
 
 -- Define the virtual host.
 VirtualHost(os.getenv("HOST"))
-ssl = {
-    key = "/etc/certs/"..os.getenv("HOST")..".key";
-    certificate = "/etc/certs/"..os.getenv("HOST")..".crt";
-}
 
 ---Set up a MUC (multi-user chat) room server on conference.example.com:
 if os.getenv("MUC_HOST") then
     Component(os.getenv("MUC_HOST"))("muc")
 end
+
+-- Set up admin console address.
+Component("console@"..os.getenv("HOST"))("admin_message")
