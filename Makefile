@@ -12,6 +12,7 @@ IMAGES = base \
 		piwik@2 \
 		piwik@2.17 \
 		piwik@2.17.1 \
+		prosody \
 		reverse-proxy \
 		rust-worker@stable \
 		rust-worker@nightly \
@@ -67,6 +68,9 @@ piwik@2.17: piwik@2.17.1
 
 piwik@%: php-nginx
 	docker build --build-arg PIWIK_VERSION=$* -t $(NS)/piwik:$* piwik
+
+prosody: nginx
+	docker build -t $(NS)/prosody prosody
 
 reverse-proxy: nginx
 	docker build -t $(NS)/reverse-proxy reverse-proxy

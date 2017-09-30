@@ -1,0 +1,23 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>XMPP</title>
+        <link type="text/css" rel="stylesheet" media="screen" href="/inverse.css" />
+        <script src="/inverse.min.js"></script>
+    </head>
+    <body>
+        <script>
+            converse.initialize({
+                authentication: 'login',
+                auto_away: 300,
+                blacklisted_plugins: ['converse-minimize', 'converse-dragresize'],
+                whitelisted_plugins: ['converse-inverse', 'converse-singleton'],
+                auto_reconnect: true,
+                bosh_service_url: '/http-bind/',
+                message_archiving: 'always',
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,3 @@
+#!/bin/sh
+export __FLUSH_LOG=yes
+exec s6-setuidgid prosody prosody

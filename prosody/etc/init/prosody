@@ -1,0 +1,11 @@
+#!/bin/sh
+mkdir -p /var/run/prosody
+chown -R prosody:prosody /data /var/run/prosody
+
+
+if [ ! -f /etc/certs/$HOST.key ]; then
+    prosodyctl cert generate $HOST
+    mv /var/lib/prosody/*.cnf /etc/certs
+    mv /var/lib/prosody/*.crt /etc/certs
+    mv /var/lib/prosody/*.key /etc/certs
+fi
