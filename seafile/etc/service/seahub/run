@@ -1,2 +1,2 @@
 #!/bin/sh
-exec gunicorn seahub.wsgi:application -c /srv/seafile-server/runtime/seahub.conf -b 0.0.0.0:80 --enable-stdio-inheritance --capture-output
+exec gunicorn seahub.wsgi:application -c /srv/seafile-server/runtime/seahub.conf -b 127.0.0.1:8000 --enable-stdio-inheritance --capture-output

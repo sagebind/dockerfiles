@@ -78,7 +78,7 @@ reverse-proxy: nginx
 rust-worker@%:
 	docker build --build-arg TOOLCHAIN=$* -t $(NS)/rust-worker:$* rust-worker
 
-seafile: base
+seafile: nginx
 	docker build -t $(NS)/seafile seafile
 
 znc: base

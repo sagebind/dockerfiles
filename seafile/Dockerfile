@@ -1,4 +1,4 @@
-FROM sagebind/base
+FROM sagebind/nginx
 
 # Install runtime dependencies.
 RUN apk --no-cache add bash ca-certificates curl glib jansson libarchive libevent libevhtp libuuid openssl python \
@@ -62,7 +62,4 @@ COPY seahub.conf /srv/seafile-server/runtime/seahub.conf
 WORKDIR /srv
 VOLUME $SEAFILE_CONF_DIR
 
-EXPOSE 80
-EXPOSE $FILESERVER_PORT
-EXPOSE $CCNET_PORT
-EXPOSE $SEAFILE_PORT
+EXPOSE 80 $FILESERVER_PORT $CCNET_PORT $SEAFILE_PORT
