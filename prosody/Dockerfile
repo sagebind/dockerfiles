@@ -12,7 +12,7 @@ RUN apk --no-cache add ca-certificates curl libevent libidn lua5.1-dbi-sqlite3 l
     openssl-dev && \
 
     # Build Prosody nightly.
-    curl https://prosody.im/nightly/0.10/latest/prosody-0.10-${PROSODY_NIGHTLY}.tar.gz | tar xzf - && \
+    curl https://prosody.im/nightly/0.10/build435/prosody-0.10-${PROSODY_NIGHTLY}.tar.gz | tar xzf - && \
     cd prosody-0.10-${PROSODY_NIGHTLY} && \
     ./configure \
         --ostype=linux \
