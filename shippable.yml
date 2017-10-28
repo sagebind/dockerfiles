@@ -1,0 +1,11 @@
+language: none
+build:
+    ci:
+        - make
+    post_ci:
+        - make push
+integrations:
+    hub:
+        -
+            integrationName: dockerhub
+            type: dockerRegistryLogin
