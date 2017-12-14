@@ -12,9 +12,10 @@ if [ ! -f $CCNET_CONF_DIR/seafile.ini ]; then
     printf $SEAFILE_CONF_DIR > $CCNET_CONF_DIR/seafile.ini
 fi
 
-# Provision a secret key for Seahub sessions.
+# Configure Seahub.
 if [ ! -f $SEAFILE_CENTRAL_CONF_DIR/seahub_settings.py ]; then
     echo "SECRET_KEY = '$(uuidgen -r)'" > $SEAFILE_CENTRAL_CONF_DIR/seahub_settings.py
+    echo "HTTP_SERVER_ROOT = '$HTTP_SERVER_ROOT'" > $SEAFILE_CENTRAL_CONF_DIR/seahub_settings.py
 fi
 
 # Set up databases.
