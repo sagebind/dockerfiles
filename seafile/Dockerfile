@@ -12,9 +12,10 @@ ENV SERVER_NAME=seafile \
     CCNET_CONF_DIR=/srv/ccnet \
     SEAFILE_CENTRAL_CONF_DIR=/srv/conf \
     SEAFILE_CONF_DIR=/data \
+    SEAHUB_LOG_DIR=/srv/logs \
     PYTHONPATH=/srv/seafile-server/seahub:/srv/seafile-server/seahub/thirdpart:/usr/local/lib/python2.7/site-packages
 
-ARG SEAFILE_VERSION=6.1.2
+ARG SEAFILE_VERSION=6.2.3
 RUN apk --no-cache add --virtual .build autoconf automake bsd-compat-headers build-base cmake curl-dev fuse-dev \
     glib-dev intltool jansson-dev jpeg-dev libarchive-dev libevent-dev libpng-dev libtool musl-dev openssl-dev \
     python-dev sqlite-dev util-linux-dev vala zlib-dev && \

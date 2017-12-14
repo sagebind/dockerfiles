@@ -1,5 +1,6 @@
 #!/bin/sh
 mkdir -p $SEAFILE_CENTRAL_CONF_DIR
+mkdir -p /srv/logs
 
 # Initialize ccnet config.
 ccnet-init -F $SEAFILE_CENTRAL_CONF_DIR -c $CCNET_CONF_DIR --name $SERVER_NAME --port $CCNET_PORT --host 0.0.0.0
@@ -14,8 +15,9 @@ fi
 
 # Configure Seahub.
 if [ ! -f $SEAFILE_CENTRAL_CONF_DIR/seahub_settings.py ]; then
-    echo "SECRET_KEY = '$(uuidgen -r)'" > $SEAFILE_CENTRAL_CONF_DIR/seahub_settings.py
-    echo "HTTP_SERVER_ROOT = '$HTTP_SERVER_ROOT'" > $SEAFILE_CENTRAL_CONF_DIR/seahub_settings.py
+    echo "SERVICE_URL = 'http://127.0.0.1'" >> $SEAFILE_CENTRAL_CONF_DIR/seahub_settings.py
+    echo "FILE_SERVER_ROOT = 'http://127.0.0.1/seafhttp'" >> $SEAFILE_CENTRAL_CONF_DIR/seahub_settings.py
+    echo "SECRET_KEY = '$(uuidgen -r)'" >> $SEAFILE_CENTRAL_CONF_DIR/seahub_settings.py
 fi
 
 # Set up databases.
