@@ -12,6 +12,7 @@ IMAGES = base \
 		piwik@2 \
 		piwik@2.17 \
 		piwik@2.17.1 \
+		pritunl \
 		prosody \
 		reverse-proxy \
 		rust-worker@stable \
@@ -36,6 +37,9 @@ $(IMAGES) $(PUSHES): .FORCE
 
 base:
 	docker build -t $(NS)/base base
+
+base@%:
+	docker build --build-arg ALPINE_VERSION=$* -t $(NS)/base:$* base
 
 digitalocean-ddns: base
 	docker build -t $(NS)/digitalocean-ddns digitalocean-ddns
@@ -68,6 +72,9 @@ piwik@2.17: piwik@2.17.1
 
 piwik@%: php-nginx
 	docker build --build-arg PIWIK_VERSION=$* -t $(NS)/piwik:$* piwik
+
+pritunl: base@3.6
+	docker build -t $(NS)/pritunl pritunl
 
 prosody: nginx
 	docker build -t $(NS)/prosody prosody

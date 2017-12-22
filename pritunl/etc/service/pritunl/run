@@ -1,0 +1,3 @@
+#!/bin/sh
+pritunl set-mongodb mongodb://localhost:27017/pritunl
+exec pritunl start

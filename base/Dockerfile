@@ -1,4 +1,5 @@
-FROM alpine:latest
+ARG ALPINE_VERSION=latest
+FROM alpine:$ALPINE_VERSION
 MAINTAINER Stephen Coakley <me@stephencoakley.com>
 
 RUN apk --no-cache upgrade && \
