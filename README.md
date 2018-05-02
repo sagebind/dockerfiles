@@ -24,9 +24,6 @@ A lightweight PHP application server with PHP 7, PHP-FPM and [NGINX].
 ### [`piwik`](piwik)
 A lightweight image for [Piwik], a popular open-source analytics platform.
 
-### [`php7-legacy`](php7-legacy)
-An old Ubuntu-based image containing PHP 7 development tools, made back when PHP 7 was in alpha. Formerly on Docker Hub as `coderstephen/php7`, somehow this poorly-made, outdated image became really popular and had nearly 2 million downloads. To discourage its use, especially in production, it has been renamed to `php7-legacy`.
-
 ## License
 Unless otherwise indicated, all files in this repository are licensed under the [MIT license][license].
 
