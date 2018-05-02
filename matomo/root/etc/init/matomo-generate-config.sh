@@ -7,11 +7,11 @@ if [ -z "$DB_PORT" ]; then
 fi
 
 if [ -z "$DB_NAME" ]; then
-    export DB_NAME=piwik
+    export DB_NAME=matomo
 fi
 
 if [ -z "$DB_PREFIX" ]; then
-    export DB_PREFIX=piwik_
+    export DB_PREFIX=matomo_
 fi
 
 envsubst < $TEMPLATE > $CONFIG_FILE

@@ -1,7 +1,7 @@
 FROM sagebind/php-nginx:latest
-MAINTAINER Stephen Coakley <me@stephencoakley.com>
+LABEL maintainer="Stephen Coakley <me@stephencoakley.com>"
 
-ARG PIWIK_VERSION=latest
+ARG VERSION=latest
 
 RUN apk --no-cache add \
         php7-ctype \
@@ -10,9 +10,9 @@ RUN apk --no-cache add \
         php7-iconv \
         php7-pdo_mysql \
         wget && \
-    wget -q http://builds.piwik.org/piwik-${PIWIK_VERSION}.tar.gz && \
-    tar -xzf piwik-${PIWIK_VERSION}.tar.gz && \
-    rm piwik-${PIWIK_VERSION}.tar.gz && \
+    wget -q http://builds.piwik.org/piwik-${VERSION}.tar.gz && \
+    tar -xzf piwik-${VERSION}.tar.gz && \
+    rm piwik-${VERSION}.tar.gz && \
     mv piwik/* . && \
     rm -r piwik && \
     wget -q http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz && \
