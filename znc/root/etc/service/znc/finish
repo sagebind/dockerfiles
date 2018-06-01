@@ -1,0 +1,4 @@
+#!/bin/sh
+if [ $1 -ne 0 -a $1 -ne 256 ]; then
+    exec halt
+fi
