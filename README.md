@@ -1,7 +1,8 @@
 # Dockerfiles
-This repository contains a collection of Dockerfiles, which are specifications of container images for Docker. Official builds of these images are available in [Docker Hub][docker-hub] under my user name.
 
-[![Shippable](https://img.shields.io/shippable/59f4fe44e07b77070018129f.svg)](https://app.shippable.com/github/sagebind/dockerfiles)
+[![Build Status](https://semaphoreci.com/api/v1/sagebind/dockerfiles/branches/master/badge.svg)](https://semaphoreci.com/sagebind/dockerfiles)
+
+This repository contains a collection of Dockerfiles, which are specifications of container images for Docker. Official builds of these images are available in [Docker Hub][docker-hub] under my user name.
 
 ## Conventions
 While each image in this repository serves a different use-case, for simplicity they all share some common conventions:
