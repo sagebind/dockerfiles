@@ -1,0 +1,16 @@
+#!/bin/sh
+# Wait for all other services to be up.
+find /etc/service \
+    -mindepth 1 \
+    -maxdepth 1 \
+    -type d \
+    ! -name cmdline \
+    ! -name '.s6*' \
+    -exec s6-svwait -u {} \;
+
+# Change to the user working directory.
+cd $(cat /run/pwd)
+
+# Execute the user command.
+IFS=$'\n'
+exec s6-setsid -g -q $(cat /run/cmdline)

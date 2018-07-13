@@ -1,16 +1,13 @@
-#!/bin/execlineb -S0
-foreground {
-    find /etc/init -type f -perm -300 -exec {} \;
-}
-foreground {
-    if {
-        test $# -ne 0
-    }
-    background {
-        foreground {
-            s6-setsid -g -q $@
-        }
-        shutdown
-    }
-}
-s6-svscan -S -t0 /etc/service
+#!/bin/sh
+# Run init scripts.
+find /etc/init -type f -perm -300 -exec {} \;
+
+# If a user command is given, save it and enable the cmdline service.
+if [ $# -ne 0 ]; then
+    printf '%s\n' "$@" > /run/cmdline
+    pwd > /run/pwd
+    rm /etc/service/cmdline/down
+fi
+
+# Start process manager.
+exec s6-svscan -S -t0 /etc/service
