@@ -1,2 +1,2 @@
-#!/bin/execlineb -P
-crond -f -d6
+#!/bin/sh
+exec crond -f -d ${CRON_LOG_LEVEL-9}

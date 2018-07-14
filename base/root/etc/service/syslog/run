@@ -1,2 +1,2 @@
-#!/bin/execlineb -P
-syslogd -n -O -
+#!/bin/sh
+exec syslogd -n -l ${SYSLOG_LEVEL-6} -O -
