@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+
+mkdir -p /var/run
+exec ssh -fnNT \
+    -o 'ExitOnForwardFailure yes' \
+    -o 'StrictHostKeyChecking no' \
+    -i /var/key \
+    -L /var/run/docker.sock:/var/run/docker.sock \
+    "${REMOTE_USER-root}@$REMOTE_HOST"
