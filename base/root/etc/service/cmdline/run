@@ -1,12 +1,10 @@
 #!/bin/sh
 # Wait for all other services to be up.
-find /etc/service \
-    -mindepth 1 \
-    -maxdepth 1 \
-    -type d \
-    ! -name cmdline \
-    ! -name '.s6*' \
-    -exec s6-svwait -u {} \;
+for service in /etc/service/*; do
+    if [ ! -f $service/down ]; then
+        s6-svwait -u $service
+    fi
+done
 
 # Change to the user working directory.
 cd $(cat /run/pwd)

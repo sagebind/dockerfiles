@@ -1,4 +1,6 @@
 #!/bin/sh
+set -eu
+
 # Run init scripts.
 find /etc/init -type f -perm -300 -exec {} \;
 
@@ -7,6 +9,24 @@ if [ $# -ne 0 ]; then
     printf '%s\n' "$@" > /run/cmdline
     pwd > /run/pwd
     rm /etc/service/cmdline/down
+fi
+
+# Enable services listed in $INIT_ENABLED_SERVICES.
+if [ -n "${INIT_ENABLED_SERVICES-}" ]; then
+    IFS=","
+    for service in $INIT_ENABLED_SERVICES; do
+        rm /etc/service/$service/down || true
+    done
+    unset IFS
+fi
+
+# Disable services listed in $INIT_DISABLED_SERVICES.
+if [ -n "${INIT_DISABLED_SERVICES-}" ]; then
+    IFS=","
+    for service in $INIT_DISABLED_SERVICES; do
+        touch /etc/service/$service/down
+    done
+    unset IFS
 fi
 
 # Start process manager.

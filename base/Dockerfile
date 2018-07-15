@@ -8,4 +8,3 @@ RUN apk --no-cache upgrade && \
 COPY root /
 
 ENTRYPOINT ["/sbin/init"]
-CMD ["/bin/sh"]
